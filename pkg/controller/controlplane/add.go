@@ -83,9 +83,9 @@ func getControlPlaneSecrets(useTokenRequestor bool) secrets.Interface {
 	return nil
 }
 
-func getShootAccessSecrets(useTokenRequestor bool) []*gutil.ShootAccessSecret {
+func getShootAccessSecrets(useTokenRequestor bool) func(string) []*gutil.ShootAccessSecret {
 	if useTokenRequestor {
-		return shootAccessSecrets
+		return shootAccessSecretsFunc
 	}
 	return nil
 }

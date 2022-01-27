@@ -198,15 +198,17 @@ var controlPlaneSecrets = &secrets.Secrets{
 	},
 }
 
-var shootAccessSecrets = []*gutil.ShootAccessSecret{
-	gutil.NewShootAccessSecret(vsphere.CloudControllerManagerName, ""),
-	gutil.NewShootAccessSecret(vsphere.CSIAttacherName, ""),
-	gutil.NewShootAccessSecret(vsphere.CSIProvisionerName, ""),
-	gutil.NewShootAccessSecret(vsphere.CSISnapshotterName, ""),
-	gutil.NewShootAccessSecret(vsphere.VsphereCSIControllerName, ""),
-	gutil.NewShootAccessSecret(vsphere.VsphereCSISyncerName, ""),
-	gutil.NewShootAccessSecret(vsphere.CSIResizerName, ""),
-	gutil.NewShootAccessSecret(vsphere.CSISnapshotControllerName, ""),
+func shootAccessSecretsFunc(namespace string) []*gutil.ShootAccessSecret {
+	return []*gutil.ShootAccessSecret{
+		gutil.NewShootAccessSecret(vsphere.CloudControllerManagerName, namespace),
+		gutil.NewShootAccessSecret(vsphere.CSIAttacherName, namespace),
+		gutil.NewShootAccessSecret(vsphere.CSIProvisionerName, namespace),
+		gutil.NewShootAccessSecret(vsphere.CSISnapshotterName, namespace),
+		gutil.NewShootAccessSecret(vsphere.VsphereCSIControllerName, namespace),
+		gutil.NewShootAccessSecret(vsphere.VsphereCSISyncerName, namespace),
+		gutil.NewShootAccessSecret(vsphere.CSIResizerName, namespace),
+		gutil.NewShootAccessSecret(vsphere.CSISnapshotControllerName, namespace),
+	}
 }
 
 var legacySecretNamesToCleanup = []string{
